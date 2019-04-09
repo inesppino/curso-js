@@ -63,8 +63,52 @@ function accSuma() {
     return acc;
 }
 
-// console.log('primera '+ accSuma(1));
-// console.log('segunda '+ accSuma(1));
-// console.log('tercera '+ accSuma(4));
-// console.log('cuarta '+ accSuma(10));
-// console.log('cuarta '+ accSuma(2,5));
+function accResta() {
+    if (acc == 0) {
+        acc = arguments[0];
+    } else {
+        for (let i = 0; i < arguments.length; i++) {
+            acc = acc - arguments[i];
+        }
+    }
+    return acc;
+}
+
+function accMultiplicar() {
+    if (acc == 0) {
+        acc = arguments[0];
+        
+    } else {
+        for (let i = 0; i < arguments.length; i++) {
+            acc = acc * arguments[i];
+        }
+    }
+    return acc;
+}
+
+function accDividir() {
+    if (acc == 0) {
+        acc = arguments[0];
+        
+    } else {
+        for (let i = 0; i < arguments.length; i++) {
+            acc = acc / arguments[i];
+        }
+    }
+    return acc;
+}
+
+console.log('primera '+ accSuma(1));
+console.log('segunda '+ accSuma(1));
+console.log('tercera '+ accSuma(4));
+console.log('cuarta '+ accSuma(10));
+console.log('cuarta '+ accSuma(2,5));
+
+console.log('primera resta ' + accResta(4));
+console.log('segunda resta ' + accResta(1));
+
+console.log('primera multiplicacion ' + accMultiplicar(8));
+console.log('segunda multiplicacion ' + accMultiplicar(2));
+
+console.log('primera division ' + accDividir(4));
+console.log('segunda division ' + accDividir(2));
