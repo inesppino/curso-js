@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <title>Lista de Peliculas</title>
+</head>
+
+<body>
+  <header class="header">
+    <h1 class="main-title">Peliculas</h1>
+  </header>
+  <main class="main">
+    <section class="main-section form">
+      <form action="" method="POST">
+        <div class="form-container">
+          <div class="input-container title">
+            <label for="filmName">Titulo</label>
+            <input placeholder="Pulp Fiction" id="filmName" type="text" name="filmName">
+          </div>
+
+          <div class="input-container director">
+            <label for="directorName">Director</label>
+            <input placeholder="Quentin Tarantino" id="directorName" type="text" name="directorName">
+          </div>
+
+          <div class="input-container id">
+            <label for="idNumber">Código-ID</label>
+            <input type="text" placeholder="ABC-12539-BA" pattern="(^[a-zA-Z]{3}-[0-9]{5}-[a-zA-Z]{2}$)" id="idNumber"
+              name="idNumber">
+          </div>
+
+          <div class="input-container genre">
+            <label for="genre">Género</label>
+            <select id="genre" name="genre" placeholder="Thriller">
+              <option>Thriller</option>
+              <option>Action</option>
+              <option>Comedy</option>
+              <option>Mystery</option>
+              <option>Drama</option>
+              <option>Fantasy</option>
+              <option>Horror</option>
+              <option>Historical</option>
+              <option>Romance</option>
+            </select>
+          </div>
+
+          <div class="input-container date">
+            <label for="publicationDate">Fecha de Publicación</label>
+            <input type="date" id="publicationDate" name="publicationDate" />
+          </div>
+
+          <div class="input-container grade">
+            <label for="grade">Valoración</label>
+            <input type="range" min="0" max="10" id="grade" name="grade">
+          </div>
+
+          <div class="input-container__btn-enviar">
+            <input class="btn-submit" type="submit" value="Enviar">
+          </div>
+      </form>
+      </div>
+    </section>
+
+    <section class="main-section__table">
+      <table class="table__film">
+        <tr>
+          <th>Cod-id</th>
+          <th>Título</th>
+          <th>Director</th>
+          <th>Género</th>
+          <th>Fecha</th>
+          <th>Valoración</th>
+        </tr>
+        <tr>
+          <td>ABC-12539-BA</td>
+          <td>Pulp Fiction</td>
+          <td>Quentin Tarantino</td>
+          <td>Thriller</td>
+          <td>1994</td>
+          <td>8</td>
+        </tr>
+        <tr>
+          <td>CBC-12539-BC</td>
+          <td>El jovencito Frankenstein</td>
+          <td>Mel Brooks</td>
+          <td>Comedy</td>
+          <td>1974</td>
+          <td>7</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </section>
+
+  </main>
+  <footer class="header"> Inés Pedraza &copy;2019 curso full-stack</footer>
+
+  <script type="text/javascript" src="assets/js/main.js"></script>
+</body>
+
+</html>
