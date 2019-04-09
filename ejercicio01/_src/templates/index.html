@@ -17,25 +17,26 @@
     <section class="main-section form">
       <form action="" method="POST">
         <div class="form-container">
+          <h2 class="form-title">Dar de alta una película</h2>
           <div class="input-container title">
-            <label for="filmName">Titulo</label>
-            <input placeholder="Pulp Fiction" id="filmName" type="text" name="filmName">
+            <label for="filmName">Titulo*</label>
+            <input placeholder="Pulp Fiction" id="filmName" type="text" name="filmName" required>
           </div>
 
           <div class="input-container director">
-            <label for="directorName">Director</label>
-            <input placeholder="Quentin Tarantino" id="directorName" type="text" name="directorName">
+            <label for="directorName">Director*</label>
+            <input placeholder="Quentin Tarantino" id="directorName" type="text" name="directorName" required>
           </div>
 
           <div class="input-container id">
             <label for="idNumber">Código-ID</label>
-            <input type="text" placeholder="ABC-12539-BA" pattern="(^[a-zA-Z]{3}-[0-9]{5}-[a-zA-Z]{2}$)" id="idNumber"
-              name="idNumber">
+            <input type="text" placeholder="ABC-12539-BA" pattern="(^[a-zA-Z]{3}-[0-9]{5}-[a-zA-Z]{2}$)" id="idNumber" name="idNumber">
           </div>
 
           <div class="input-container genre">
-            <label for="genre">Género</label>
-            <select id="genre" name="genre" placeholder="Thriller">
+            <label for="genre">Género*</label>
+            <select id="genre" name="genre" placeholder="Thriller" required>
+              <option>Pick one</option>
               <option>Thriller</option>
               <option>Action</option>
               <option>Comedy</option>
@@ -49,13 +50,13 @@
           </div>
 
           <div class="input-container date">
-            <label for="publicationDate">Fecha de Publicación</label>
-            <input type="date" id="publicationDate" name="publicationDate" />
+            <label for="publicationDate">Fecha de Publicación*</label>
+            <input type="date" id="publicationDate" name="publicationDate" required>
           </div>
 
           <div class="input-container grade">
-            <label for="grade">Valoración</label>
-            <input type="range" min="0" max="10" id="grade" name="grade">
+            <label for="grade">Valoración*</label>
+            <input type="range" min="0" max="10" id="grade" name="grade" required>
           </div>
 
           <div class="input-container__btn-enviar">
