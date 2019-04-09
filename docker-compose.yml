@@ -1,0 +1,9 @@
+version: '3'
+services: 
+  apache:
+    image: httpd:2.4-alpine
+    volumes:
+      - "./content:/var/www/html"
+    
+    ports:
+      - "80:80"
