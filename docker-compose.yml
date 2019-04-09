@@ -3,7 +3,6 @@ services:
   apache:
     image: httpd:2.4-alpine
     volumes:
-      - "./content:/var/www/html"
-    
+      - "./:/var/www/html"
     ports:
-      - "80:80"
+      - "8080:80"
