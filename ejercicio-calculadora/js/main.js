@@ -1,57 +1,66 @@
 
-function suma(){
+function suma() {
     var acc = 0;
-    for (let i = 0; i < arguments.length; i ++){
-        acc = acc + arguments[i];
+    if (arguments.callee.length == arguments.length) {
+        return acc = primero + segundo;
+
+    } else {
+        for (let i = 0; i < arguments.length; i++) {
+            acc = acc + arguments[i];
+        }
+        return acc;
     }
-    return acc;  
 }
 
-function sumaDos(primero, segundo){
-    var resultadoSumaDos = 0
-    if(arguments.callee.length == arguments.length){
-    resultadoSumaDos = primero+segundo;
-    }
-    return resultadoSumaDos;
-}
+console.log("Aqui suma " + suma(2, 5));
 
-console.log("aqui sumaDos " + sumaDos(1,2,5));
-console.log("Aqui suma " + suma(2,5,3));
-
-function resta(primero, segundo){
-    if(arguments.callee.length == arguments.length){
+function resta(primero, segundo) {
+    if (arguments.callee.length == arguments.length) {
         return primero - segundo;
     } else {
         var resultadoResta = arguments[0];
-        for (let i = 1; i < arguments.length; i++){
-            resultadoResta =  resultadoResta -arguments[i];
+        for (let i = 1; i < arguments.length; i++) {
+            resultadoResta = resultadoResta - arguments[i];
         }
         return resultadoResta;
     }
 }
 
-console.log(resta(3,2));
-console.log(resta(10,5,2));
-
-function multiplicar(primero, segundo){
-    if(arguments.callee.length == arguments.length){
+function multiplicar(primero, segundo) {
+    if (arguments.callee.length == arguments.length) {
         return primero * segundo;
+    } else {
+        var resultadoMultiplicacion = arguments[0];
+        for (let i = 1; i < arguments.length; i++) {
+            resultadoMultiplicacion = resultadoMultiplicacion * arguments[i];
+        }
+        return resultadoMultiplicacion;
     }
 }
 
-function dividir(primero, segundo){
-    if(arguments.callee.length == arguments.length){
+console.log("aqui se multiplica " + multiplicar(2, 2, 2));
+
+function dividir(primero, segundo) {
+    if (arguments.callee.length == arguments.length) {
         return primero / segundo;
+    } else {
+        var resultadoDivision = arguments[0];
+        for (let i = 1; i < arguments.length; i++) {
+            resultadoDivision = resultadoDivision / arguments[i];
+        }
+        return resultadoDivision;
     }
 }
 
-var acc=0;
+console.log("aqui se divide " + dividir(8, 2, 2));
 
-function accSuma(){
-    for (let i = 0; i < arguments.length; i ++){
+var acc = 0;
+
+function accSuma() {
+    for (let i = 0; i < arguments.length; i++) {
         acc = acc + arguments[i];
     }
-    return acc;  
+    return acc;
 }
 
 // console.log('primera '+ accSuma(1));
