@@ -80,16 +80,17 @@
             <th>Valoración</th>
             <th>Acciones</th>
           </tr>
-          <tr>
-            <td>ABC-12539-BA</td>
-            <td>Pulp Fiction</td>
-            <td>Quentin Tarantino</td>
-            <td>Thriller</td>
-            <td>1994</td>
-            <td>8</td>
-            <td>
-              <button onClick="" class="btn btn-modify" type="button" value="modify">Modificar</button>
-              <button onClick="" class="btn btn-eliminar" type="button" value="eliminar">Eliminar</button>
+          <tr class="ABC-12539-BA">
+            <td class="celdaId">ABC-12539-BA</td>
+            <td class="celdaFilm"> Pulp Fiction</td>
+            <td class="celdaDirector">Quentin Tarantino</td>
+            <td class="celdaGenre">Thriller</td>
+            <td class="celdaDate">1994</td>
+            <td class="celdaGrade">8</td>
+            <td class="celdaBtn">
+              <button onclick="" class="btn btn-modify" type="button" value="modify">Modificar</button>
+              
+              <button onclick="eliminarFila()" id="2" class="btn btn-eliminar" data-id="ABC-12539-BA" type="button" value="eliminar">Eliminar</button>
             </td>
           </tr>
           <tr>
@@ -100,8 +101,8 @@
             <td>1974</td>
             <td>7</td>
             <td>
-              <button onClick="" class="btn btn-modify" type="button" value="modify">Modificar</button>
-              <button onClick="" class="btn btn-eliminar" type="button" value="eliminar">Eliminar</button>
+              <button onclick="" class="btn btn-modify" type="button" value="modify">Modificar</button>
+              <button onclick="eliminarFila()"  class="btn btn-eliminar" type="button" data-id="CBC-12539-BC" id="2" value="eliminar">Eliminar</button>
             </td>
           </tr>
         </tbody>
