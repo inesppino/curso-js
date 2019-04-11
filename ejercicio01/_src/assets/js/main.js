@@ -1,8 +1,8 @@
 'use strict';
 
-const Peliculas =[]
+const peliculas = []
 
-const jsonFilm = {
+const Film = {
     "filmName": "",
     "directorName": "",
     "idNumber": "",
@@ -20,18 +20,23 @@ const grade = document.querySelector('#grade');
 const submitBtn = document.querySelector('.btn-submit');
 const myTable = document.getElementById("table-body");
 
-function getFields (){
-    jsonFilm.filmName = filmName.value;
-    jsonFilm.directorName = directorName.value;
-    jsonFilm.idNumber = idNumber.value;
-    jsonFilm.genre = genre.value;
-    jsonFilm.publicationDate = publicationDate.value;
-    jsonFilm.grade = grade.value;
+function getFields() {
+    const newFilm = {...Film};
+    newFilm.filmName = filmName.value;
+    newFilm.directorName = directorName.value;
+    newFilm.idNumber = idNumber.value;
+    newFilm.genre = genre.value;
+    newFilm.publicationDate = publicationDate.value;
+    newFilm.grade = grade.value;
+    
+    return newFilm;
 }
 
-function darDeAlta (){
+function darDeAlta() {
+    const jsonFilm = getFields();
+    
     const fila = document.createElement('tr');
-    fila.className = jsonFilm.idNumber;
+    fila.id = jsonFilm.idNumber;
 
     const celdafilmName = document.createElement('td');
     const textFilmName = document.createTextNode(jsonFilm.filmName);
@@ -67,39 +72,72 @@ function darDeAlta (){
     const btnModificar = document.createElement('button');
     const btnTextM = document.createTextNode('Modificar');
     btnModificar.appendChild(btnTextM);
-    btnModificar.className='btn btn-modify';
-    btnModificar.type="button";
+    btnModificar.className = 'btn btn-modify';
+    btnModificar.type = "button";
+    btnModificar.setAttribute('data-name', jsonFilm.filmName);
+    btnModificar.setAttribute('data-director', jsonFilm.directorName);
+    btnModificar.setAttribute('data-id', jsonFilm.idNumber);
+    btnModificar.setAttribute('data-genre', jsonFilm.genre);
+    btnModificar.setAttribute('data-date', jsonFilm.publicationDate);
+    btnModificar.setAttribute('data-grade', jsonFilm.grade);
+    btnModificar.addEventListener('click', modificar);
     btn.appendChild(btnModificar);
 
     const btnEliminar = document.createElement('button');
     const btnTextE = document.createTextNode('Eliminar');
     btnEliminar.appendChild(btnTextE);
-    btnEliminar.className='btn btn-eliminar';
-    btnEliminar.type="button";
-    btnEliminar.setAttribute('dataId', jsonFilm.idNumber);
+    btnEliminar.className = 'btn btn-eliminar';
+    btnEliminar.type = "button";
+    btnEliminar.addEventListener('click', eliminarFila);
+    btnEliminar.setAttribute('data-id', jsonFilm.idNumber);
     btn.appendChild(btnEliminar);
 
     fila.appendChild(btn);
 
     myTable.appendChild(fila);
 
-    Peliculas.push(jsonFilm);
-    console.log(Peliculas);
+    peliculas.push(jsonFilm);
+    console.log(peliculas);
 }
 
-function eliminarFila(){
-    //const seleccionado = document.querySelector(".ABC-12539-BA");
-    var guilty = document.querySelector('.btn-eliminar');
-    var seleccionado = guilty.getAttribute('data-id');
-    //myTable.removeChild(seleccionado);
-    console.log(guilty);
-    console.log(seleccionado);
+const eliminarFila = (event) => {
+    const jsonFilm = getFields();
+    const culpable = event.currentTarget;
+    const seleccionado = culpable.getAttribute('data-id');
+    const fila = document.getElementById(seleccionado);
+    myTable.removeChild(fila);
+    for (let i = 0; i < peliculas.length; i++) {
+        if (seleccionado === peliculas[i].idNumber) {
+           peliculas.splice(i,1);
+        }
+    } 
+    return peliculas;
+}
+
+const modificar = (event) => {
+    const culpable = event.currentTarget;
+    filmName.value = culpable.getAttribute('data-name');
+    directorName.value = culpable.getAttribute('data-director');
+    idNumber.value = culpable.getAttribute('data-id');
+    genre.value = culpable.getAttribute('data-genre');
+    publicationDate.value = culpable.getAttribute('data-date');
+    grade.value = culpable.getAttribute('data-grade');
+}
+
+const btnM = document.querySelectorAll('.btn-modify');
+for (let i = 0; i < btnM.length; i++) {
+    btnM[i].addEventListener('click', modificar);
+}
+
+const btnE = document.querySelectorAll('.btn-eliminar');
+for (let i = 0; i < btnE.length; i++) {
+    btnE[i].addEventListener('click', eliminarFila);
 }
 
 
 // const celdaId = document.querySelector('.celdaId');
 // const celdaFilm = document.querySelector('.celdaFilm');
-// const celdaDirector = document.querySelector('.celdaId');
-// const celdaGenre = document.querySelector('.celdaId');
-// const celdaDate = document.querySelector('.celdaId');
+// const celdaDirector = document.querySelector('.celdaDirector');
+// const celdaGenre = document.querySelector('.celdaGenre');
+// const celdaDate = document.querySelector('.celdaDate');
 // const celdaBtn = document.querySelector('.celdaBtn');
