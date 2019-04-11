@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+  <title>Peliculast</title>
+  <script type="text/javascript" src="assets/js/main.js"></script>
+  <!-- <script type="text/javascript" src="../assets/js/controller/appPeliculas.js"></script> -->
+  <!-- <script type="text/javascript" src="../assets/js/model/modeloPeliculas.js"></script> -->
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body onload="inicioApp()">
+  <header class="header">
+    <h1 class="main-title">Peliculas</h1>
+  </header>
+  <main class="main">
+    <section class="main-section form">
+      <form action="" method="POST">
+        <div class="form-container">
+          <h2 class="form-title">Dar de alta una película</h2>
+          <div class="input-container title">
+            <label for="filmName">Titulo*</label>
+            <input onkeyup="getFields()" placeholder="Pulp Fiction" id="filmName" type="text" name="filmName" required>
+          </div>
+
+          <div class="input-container director">
+            <label for="directorName">Director*</label>
+            <input onkeyup="getFields()" placeholder="Quentin Tarantino" id="directorName" type="text"
+              name="directorName" required>
+          </div>
+
+          <div class="input-container id">
+            <label for="idNumber">Código-ID</label>
+            <input type="text" onkeyup="getFields()" placeholder="ABC-12539-BA"
+              pattern="(^[a-zA-Z]{3}-[0-9]{5}-[a-zA-Z]{2}$)" id="idNumber" name="idNumber">
+          </div>
+
+          <div class="input-container genre">
+            <label for="genre">Género*</label>
+            <select id="genre" name="genre" placeholder="Thriller" onchange="getFields()" required>
+              <option></option>
+              <option>Thriller</option>
+              <option>Action</option>
+              <option>Comedy</option>
+              <option>Mystery</option>
+              <option>Drama</option>
+              <option>Fantasy</option>
+              <option>Horror</option>
+              <option>Historical</option>
+              <option>Romance</option>
+            </select>
+          </div>
+
+          <div class="input-container date">
+            <label for="publicationDate">Fecha de Publicación*</label>
+            <input onchange="getFields()" type="date" id="publicationDate" name="publicationDate" required>
+          </div>
+
+          <div class="input-container grade">
+            <label for="grade">Valoración*</label>
+            <input onchange="getFields()" type="range" min="0" max="10" id="grade" name="grade" required>
+          </div>
+
+          <div class="input-container__btn-enviar">
+            <input onclick="darDeAlta()" class="btn-submit" type="button" value="Enviar">
+          </div>
+      </form>
+      </div>
+    </section>
+
+    <section class="main-section__table">
+      <table id="table" class="table__film">
+        <tbody id="table-body">
+          <tr>
+            <th>Cod-id</th>
+            <th>Título</th>
+            <th>Director</th>
+            <th>Género</th>
+            <th>Fecha</th>
+            <th>Valoración</th>
+            <th>Acciones</th>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+  <footer class="footer"> Inés Pedraza &copy;2019 curso full-stack</footer>
+  
+</body>
+</html>
