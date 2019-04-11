@@ -1,45 +1,68 @@
-
 class modeloPeliculas {
 
-    constructor(){
-        this.listaPeliculas = new Array();
+    constructor() {
+        if (localStorage.getItem("peliculas") == null) {
+            localStorage.setItem("peliculas", JSON.stringify([]))
+        }
+        //this.listaPeliculas = new Array();
     }
 
-    saveMovie(pelicula){
-        if(this.showMovies(pelicula.id) === "undefined"){
-            this.listaPeliculas.push(pelicula);
+    getPeliculasFromLocalStorage() {
+        return JSON.parse(localStorage.getItem("peliculas"))
+    }
+
+    setPeliculasToLocalStorage(peliculas) {
+        localStorage.setItem("peliculas", JSON.stringify(peliculas))
+    }
+
+    saveMovie(pelicula) {
+        if (this.showMovies(pelicula.id) !== "undefined") {
+            //this.listaPeliculas.push(pelicula);
+            const peliculas = this.getPeliculasFromLocalStorage();
+            //pelicula.date = pelicula.date;
+            peliculas.push(pelicula);
+            this.setPeliculasToLocalStorage(peliculas);
         }
     }
 
-    showMovies(){
-        return this.listaPeliculas;
+    showMovies() {
+        //return this.listaPeliculas;
+        return this.getPeliculasFromLocalStorage();
     }
 
-    showMovie(){
-        for(let i = 0; i < this.listaPeliculas.length; i++){
-            let peliculaElegida = this.listaPeliculas[i];
-            if(peliculaElegida.id === id){
+    showMovie(id) {
+        const listaPeliculas = this.getPeliculasFromLocalStorage();
+        for (let i = 0; i < listaPeliculas.length; i++) {
+            let peliculaElegida = listaPeliculas[i];
+            if (peliculaElegida.idNumber === id) {
+                //peliculaActual.fecha = new Date(peliculaActual.fecha);
                 return peliculaElegida;
             }
         }
     }
 
-    editMovie(pelicula){
-        for(let i=0; i < this.listaPeliculas.length; i++){
+    editMovie(pelicula) {
+        const listaPeliculas = this.getPeliculasFromLocalStorage();
+        for (let i = 0; i < listaPeliculas.length; i++) {
             let peliculaElegida = this.listaPeliculas[i];
-            if(peliculaElegida.id === pelicula.id){
-                peliculaElegida = pelicula;
+            if (peliculaElegida.idNumber === pelicula.id) {
+                pelicula.fecha = pelicula.fecha.toJSON()
+                listaPeliculas[i] = pelicula;
+                this.setPeliculasToLocalStorage(listaPeliculas);
                 return true;
             }
         }
         return false;
     }
 
-    deleteMovie(id){
-        for (let i=0; i< this.listaPeliculas.length; i++){
-            let peliculaElegida = this.listaPeliculas[i];
-            if(peliculaElegida.id === id){
-                return this.listaPeliculas.splice(i,1);
+    deleteMovie(id) {
+        const listaPeliculas = this.getPeliculasFromLocalStorage();
+        for (let i = 0; i < listaPeliculas.length; i++) {
+            let peliculaElegida = listaPeliculas[i];
+            if (peliculaElegida.idNumber === id) {
+                const pelicula = listaPeliculas.splice(i, 1);
+                this.setPeliculasToLocalStorage(listaPeliculas);
+                return pelicula;
             }
         }
     }

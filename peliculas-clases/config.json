@@ -17,7 +17,9 @@
 	},
 	"js": {
 		"src": [
-			"_src/assets/js/main.js"
+      "_src/assets/js/controller/appPeliculas.js",
+      "_src/assets/js/model/modeloPeliculas.js",
+      "_src/assets/js/model/Pelicula.js"
 		],
 		"dest": "public/assets/js/",
     "dist": "docs/assets/js/"
