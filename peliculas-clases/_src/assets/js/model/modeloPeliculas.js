@@ -16,7 +16,7 @@ class modeloPeliculas {
     }
 
     saveMovie(pelicula) {
-        if (typeof this.showMovie(pelicula.idNumber) === "undefined") {
+        if (typeof this.showMovie(pelicula.codId) === "undefined") {
             //this.listaPeliculas.push(pelicula);
             const peliculas = this.getPeliculasFromLocalStorage();
             peliculas.push(pelicula);
@@ -33,7 +33,7 @@ class modeloPeliculas {
         const listaPeliculas = this.getPeliculasFromLocalStorage();
         for (let i = 0; i < listaPeliculas.length; i++) {
             let peliculaElegida = listaPeliculas[i];
-            if (peliculaElegida.idNumber === id) {
+            if (peliculaElegida.codId === id) {
                 //peliculaActual.fecha = new Date(peliculaActual.fecha);
                 return peliculaElegida;
             }
@@ -44,7 +44,7 @@ class modeloPeliculas {
         const listaPeliculas = this.getPeliculasFromLocalStorage();
         for (let i = 0; i < listaPeliculas.length; i++) {
             let peliculaElegida = this.listaPeliculas[i];
-            if (peliculaElegida.idNumber === pelicula.id) {
+            if (peliculaElegida.codId === pelicula.id) {
                 pelicula.fecha = pelicula.fecha.toJSON()
                 listaPeliculas[i] = pelicula;
                 this.setPeliculasToLocalStorage(listaPeliculas);
@@ -58,7 +58,7 @@ class modeloPeliculas {
         const listaPeliculas = this.getPeliculasFromLocalStorage();
         for (let i = 0; i < listaPeliculas.length; i++) {
             let peliculaElegida = listaPeliculas[i];
-            if (peliculaElegida.idNumber === id) {
+            if (peliculaElegida.codId === id) {
                 const pelicula = listaPeliculas.splice(i, 1);
                 this.setPeliculasToLocalStorage(listaPeliculas);
                 return pelicula;
