@@ -101,7 +101,6 @@ function darDeAlta() {
 }
 
 const eliminarFila = (event) => {
-    const jsonFilm = getFields();
     const culpable = event.currentTarget;
     const seleccionado = culpable.getAttribute('data-id');
     const fila = document.getElementById(seleccionado);
@@ -111,7 +110,6 @@ const eliminarFila = (event) => {
            peliculas.splice(i,1);
         }
     } 
-    return peliculas;
 }
 
 const modificar = (event) => {
