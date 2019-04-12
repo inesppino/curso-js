@@ -18,11 +18,6 @@ function inicioApp() {
     }
 
     ajax.send();
-
-    // model.saveMovie({ idNumber: "ABC-12345-AB", filmName: "Pulp Fiction", directorName: "Quentin Tarantino", genre: "Thriller", date: "2015-01-02", grade: 8 })
-    // model.saveMovie({ idNumber: "CBA-12345-BA", filmName: "Inception", directorName: "Christopher Nolan", genre: "Fantasy", date: "2010-01-09", grade: 8 })
-
-
 }
 
 function showMoviesTable() {
