@@ -10,7 +10,6 @@ function inicioApp() {
             let datos = JSON.parse(ajax.response);
             for (let i = 0; i < datos.length; i++) {
                 model.saveMovie(datos[i]);
-                console.log(datos[i]);
             }
             showMoviesTable();
         }
@@ -55,7 +54,7 @@ function createLine(pelicula) {
     fila.appendChild(genre);
 
     const publicationDate = document.createElement('td');
-    const textPublicationDate = document.createTextNode(pelicula.fecha);
+    const textPublicationDate = document.createTextNode(formatDate(pelicula.fecha));
     publicationDate.appendChild(textPublicationDate);
     fila.appendChild(publicationDate);
 
@@ -121,13 +120,14 @@ function saveMovieButton() {
         'Content-Type', 'application/json; charset=utf-8')
     ajax.onreadystatechange = function () {
         if (ajax.status == 200 && ajax.readyState == 4) {
-            datos = JSON.parse(ajax.response)
+            datos = JSON.parse(ajax.response);
+            showMoviesTable();
         }
-        //showMoviesTable();
+        
     }
     
     ajax.send(JSON.stringify(filmJson));
-    inicioApp();
+    
 }
 
 function deleteMovieButton(event) {
@@ -138,15 +138,8 @@ function deleteMovieButton(event) {
 
     var ajax = new XMLHttpRequest();
     ajax.open("DELETE","http://192.168.1.63:8080/peliculas/"+seleccionado);
-    ajax.onreadystatechange = function (){
-
-        if(ajax.status == 200 && ajax.readyState == 4){
-            datos = JSON.parse(ajax.response)
-        }
-    }
-    
     ajax.send();
-    inicioApp();
+    showMoviesTable();
 }
 
 
@@ -167,7 +160,6 @@ function reloadForm(peli) {
 }
 
 function updateMovie(){
-
     var filmJson =
     {
         "codId": idNumber.value,
@@ -185,11 +177,10 @@ function updateMovie(){
     ajax.setRequestHeader('Content-type','application/json; charset=utf-8')
     ajax.onreadystatechange = function (){
         if(ajax.status == 200 && ajax.readyState == 4){
-            datos = JSON.parse(ajax.response)
+            datos = JSON.parse(ajax.response);
+            showMoviesTable();
         }
-        showMoviesTable();
     }
-    
     ajax.send(JSON.stringify(filmJson));
     changeButton();
 }
