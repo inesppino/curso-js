@@ -19,6 +19,7 @@ class modeloPeliculas {
         if (typeof this.showMovie(pelicula.codId) === "undefined") {
             //this.listaPeliculas.push(pelicula);
             const listaPeliculas = this.getPeliculasFromLocalStorage();
+            pelicula.fecha = new Date(pelicula.fecha);
             listaPeliculas.push(pelicula);
             this.setPeliculasToLocalStorage(listaPeliculas);
         }
@@ -34,7 +35,7 @@ class modeloPeliculas {
         for (let i = 0; i < listaPeliculas.length; i++) {
             let peliculaElegida = listaPeliculas[i];
             if (peliculaElegida.codId === id) {
-                //peliculaActual.fecha = new Date(peliculaActual.fecha);
+                peliculaElegida.fecha = formatDate(peliculaElegida.fecha);
                 return peliculaElegida;
             }
         }
@@ -45,7 +46,7 @@ class modeloPeliculas {
         for (let i = 0; i < listaPeliculas.length; i++) {
             let peliculaElegida = listaPeliculas[i];
             if (peliculaElegida.codId == pelicula.codId) {
-                //pelicula.fecha = pelicula.fecha.toJSON()
+                pelicula.fecha = new Date(pelicula.fecha);
                 listaPeliculas[i] = pelicula;
                 this.setPeliculasToLocalStorage(listaPeliculas);
                 return true;
