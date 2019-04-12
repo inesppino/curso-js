@@ -23,7 +23,12 @@
 		],
 		"dest": "public/assets/js/",
     "dist": "docs/assets/js/"
-	},
+  },
+  "json":{
+    "src": "src/assets/json/dataFilm.json",
+		"dest": "public/assets/json/",
+    "dist": "docs/assets/json/"
+  },
 	"images": {
     "src": "_src/assets/images/**/*.{gif,jpg,jpeg,JPG,JPEG,png,svg}",
     "dest": "public/assets/images/",

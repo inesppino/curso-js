@@ -1,11 +1,28 @@
+
 function inicioApp() {
     model = new modeloPeliculas();
 
-    model.saveMovie({ idNumber: "ABC-12345-AB", filmName: "Pulp Fiction", directorName: "Quentin Tarantino", genre: "Thriller", date: "2015-01-02", grade: 8 })
-    model.saveMovie({ idNumber: "CBA-12345-BA", filmName: "Inception", directorName: "Christopher Nolan", genre: "Fantasy", date: "2010-01-09", grade: 8 })
+    
+    // model.saveMovie({ idNumber: "ABC-12345-AB", filmName: "Pulp Fiction", directorName: "Quentin Tarantino", genre: "Thriller", date: "2015-01-02", grade: 8 })
+    // model.saveMovie({ idNumber: "CBA-12345-BA", filmName: "Inception", directorName: "Christopher Nolan", genre: "Fantasy", date: "2010-01-09", grade: 8 })
     showMoviesTable();
+    givedataFilm();
 }
 
+function givedataFilm(){
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET","../../json/dataFilm.json");
+    ajax.onreadystatechange = function (){
+
+        if(ajax.status == 200 && ajax.readyState == 4){
+            let datos = JSON.parse(ajax.response)
+            console.log(datos);
+        }
+        console.log(ajax.readyState);
+    }
+    
+    ajax.send();
+}
 
 function showMoviesTable() {
     var listaPeliculas = model.showMovies();
@@ -61,9 +78,9 @@ function createLine(pelicula) {
     btnModificar.setAttribute('data-director', pelicula.directorName);
     btnModificar.setAttribute('data-id', pelicula.idNumber);
     btnModificar.setAttribute('data-genre', pelicula.genre);
-    btnModificar.setAttribute('data-date', pelicula.publicationDate);
+    btnModificar.setAttribute('data-date', pelicula.date);
     btnModificar.setAttribute('data-grade', pelicula.grade);
-    btnModificar.addEventListener('click', updateMoive);
+    btnModificar.addEventListener('click', updateMovie);
     btn.appendChild(btnModificar);
 
     const btnEliminar = document.createElement('button');
@@ -86,7 +103,7 @@ function saveMovieButton() {
     peli.directorName = directorName.value;
     peli.idNumber = idNumber.value;
     peli.genre = genre.value;
-    peli.publicationDate = publicationDate.value;
+    peli.date = publicationDate.value;
     peli.grade = grade.value;
 
     model.saveMovie(peli);
@@ -101,7 +118,7 @@ function deleteMovieButton(event) {
     showMoviesTable();
 }
 
-function updateMoive(event) {
+function updateMovie(event) {
     const culpable = event.currentTarget;
     const seleccionado = culpable.getAttribute('data-id');
     reloadForm(model.showMovie(seleccionado));

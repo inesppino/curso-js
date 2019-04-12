@@ -19,7 +19,6 @@ class modeloPeliculas {
         if (typeof this.showMovie(pelicula.idNumber) === "undefined") {
             //this.listaPeliculas.push(pelicula);
             const peliculas = this.getPeliculasFromLocalStorage();
-            //pelicula.date = pelicula.date;
             peliculas.push(pelicula);
             this.setPeliculasToLocalStorage(peliculas);
         }
