@@ -18,9 +18,9 @@ class modeloPeliculas {
     saveMovie(pelicula) {
         if (typeof this.showMovie(pelicula.codId) === "undefined") {
             //this.listaPeliculas.push(pelicula);
-            const peliculas = this.getPeliculasFromLocalStorage();
-            peliculas.push(pelicula);
-            this.setPeliculasToLocalStorage(peliculas);
+            const listaPeliculas = this.getPeliculasFromLocalStorage();
+            listaPeliculas.push(pelicula);
+            this.setPeliculasToLocalStorage(listaPeliculas);
         }
     }
 
@@ -43,9 +43,9 @@ class modeloPeliculas {
     editMovie(pelicula) {
         const listaPeliculas = this.getPeliculasFromLocalStorage();
         for (let i = 0; i < listaPeliculas.length; i++) {
-            let peliculaElegida = this.listaPeliculas[i];
-            if (peliculaElegida.codId === pelicula.id) {
-                pelicula.fecha = pelicula.fecha.toJSON()
+            let peliculaElegida = listaPeliculas[i];
+            if (peliculaElegida.codId == pelicula.codId) {
+                //pelicula.fecha = pelicula.fecha.toJSON()
                 listaPeliculas[i] = pelicula;
                 this.setPeliculasToLocalStorage(listaPeliculas);
                 return true;

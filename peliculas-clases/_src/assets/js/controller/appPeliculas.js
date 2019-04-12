@@ -1,28 +1,28 @@
-
+    
 function inicioApp() {
     model = new modeloPeliculas();
-    
-    var ajax = new XMLHttpRequest();
-    ajax.open("GET","http://192.168.1.63:8080/peliculas");
-    ajax.onreadystatechange = function (){
 
-        if(ajax.status == 200 && ajax.readyState == 4){
+    var ajax = new XMLHttpRequest();
+    ajax.open("GET", "http://192.168.1.63:8080/peliculas");
+    ajax.onreadystatechange = function () {
+
+        if (ajax.status == 200 && ajax.readyState == 4) {
             let datos = JSON.parse(ajax.response);
-            for (let i = 0; i < datos.length; i++){
+            for (let i = 0; i < datos.length; i++) {
                 model.saveMovie(datos[i]);
                 console.log(datos[i]);
             }
             showMoviesTable();
         }
-    
+
     }
-    
+
     ajax.send();
-    
+
     // model.saveMovie({ idNumber: "ABC-12345-AB", filmName: "Pulp Fiction", directorName: "Quentin Tarantino", genre: "Thriller", date: "2015-01-02", grade: 8 })
     // model.saveMovie({ idNumber: "CBA-12345-BA", filmName: "Inception", directorName: "Christopher Nolan", genre: "Fantasy", date: "2010-01-09", grade: 8 })
-    
-    
+
+
 }
 
 function showMoviesTable() {
@@ -81,7 +81,7 @@ function createLine(pelicula) {
     btnModificar.setAttribute('data-genre', pelicula.genero);
     btnModificar.setAttribute('data-date', pelicula.fecha);
     btnModificar.setAttribute('data-grade', pelicula.valoracion);
-    btnModificar.addEventListener('click', updateMovie);
+    btnModificar.addEventListener('click', showEdit);
     btn.appendChild(btnModificar);
 
     const btnEliminar = document.createElement('button');
@@ -98,6 +98,7 @@ function createLine(pelicula) {
     return fila;
 }
 
+
 function saveMovieButton() {
     peli = new Pelicula();
     peli.titulo = filmName.value;
@@ -109,17 +110,52 @@ function saveMovieButton() {
 
     model.saveMovie(peli);
 
-    showMoviesTable();
+    var filmJson =
+    {
+        "codId": peli.codId,
+        "titulo": peli.titulo,
+        "director": peli.director,
+        "genero": peli.genero,
+        "fecha": peli.fecha,
+        "valoracion": peli.valoracion
+    };
+
+    var ajax = new XMLHttpRequest();
+    ajax.open("POST", "http://192.168.1.63:8080/peliculas", true);
+    ajax.setRequestHeader(
+        'Content-Type', 'application/json; charset=utf-8')
+    ajax.onreadystatechange = function () {
+        if (ajax.status == 200 && ajax.readyState == 4) {
+            datos = JSON.parse(ajax.response)
+        }
+        //showMoviesTable();
+    }
+    
+    ajax.send(JSON.stringify(filmJson));
+    inicioApp();
 }
 
 function deleteMovieButton(event) {
     const culpable = event.currentTarget;
     const seleccionado = culpable.getAttribute('data-id');
     model.deleteMovie(seleccionado);
-    showMoviesTable();
+    
+
+    var ajax = new XMLHttpRequest();
+    ajax.open("DELETE","http://192.168.1.63:8080/peliculas/"+seleccionado);
+    ajax.onreadystatechange = function (){
+
+        if(ajax.status == 200 && ajax.readyState == 4){
+            datos = JSON.parse(ajax.response)
+        }
+    }
+    
+    ajax.send();
+    inicioApp();
 }
 
-function updateMovie(event) {
+
+function showEdit(event) {
     const culpable = event.currentTarget;
     const seleccionado = culpable.getAttribute('data-id');
     reloadForm(model.showMovie(seleccionado));
@@ -132,5 +168,44 @@ function reloadForm(peli) {
     document.getElementById("genre").value = peli.genero;
     document.getElementById("publicationDate").value = peli.fecha;
     document.getElementById("grade").value = peli.valoracion;
-   
+    changeButton("mod");
+}
+
+function updateMovie(){
+
+    var filmJson =
+    {
+        "codId": idNumber.value,
+        "titulo": filmName.value,
+        "director": directorName.value,
+        "genero": genre.value,
+        "fecha": publicationDate.value,
+        "valoracion": grade.value
+    };
+
+    model.editMovie(filmJson);
+
+    var ajax = new XMLHttpRequest();
+    ajax.open("PUT","http://192.168.1.63:8080/peliculas/"+filmJson.codId, true);
+    ajax.setRequestHeader('Content-type','application/json; charset=utf-8')
+    ajax.onreadystatechange = function (){
+        if(ajax.status == 200 && ajax.readyState == 4){
+            datos = JSON.parse(ajax.response)
+        }
+        showMoviesTable();
+    }
+    
+    ajax.send(JSON.stringify(filmJson));
+    changeButton();
+}
+
+function changeButton(a){
+    var boton = document.getElementById("formButton");
+    if(a=="mod"){
+        boton.value="Modificar";
+        boton.onclick = function() { updateMovie() };
+    }else{
+        boton.value="Enviar"
+        boton.onclick = function() { saveMovieButton() };
+    }
 }
