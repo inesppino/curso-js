@@ -1,7 +1,6 @@
     
 function inicioApp() {
     model = new modeloPeliculas();
-
     var ajax = new XMLHttpRequest();
     ajax.open("GET", "http://192.168.1.63:8080/peliculas");
     ajax.onreadystatechange = function () {
