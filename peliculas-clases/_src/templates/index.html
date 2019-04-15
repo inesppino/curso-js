@@ -12,7 +12,8 @@
     <h1 class="main-title">Peliculas</h1>
   </header>
   <main class="main">
-    <section class="main-section form">
+    <button class="btn" onclick="showForm()" type="button" value="Nuevo Libro" id="btn-showForm"></button>
+    <section class="main-section form hidden">
       <form action="" method="POST">
         <div class="form-container">
           <h2 class="form-title">Dar de alta una película</h2>
@@ -60,7 +61,7 @@
           </div>
 
           <div class="input-container__btn-enviar">
-            <input id="formButton" onclick="saveMovieButton()" class="btn-submit" type="button" value="Enviar">
+            <input id="formButton" onclick="saveMovieButton()" class="btn btn-submit" type="button" value="Enviar">
           </div>
       </form>
       </div>

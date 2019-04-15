@@ -49,7 +49,7 @@ th, td {
 	padding: 15px;
 }
 
-.btn-submit{
+.btn{
 	padding: 5px 15px; 
     background: #099d8d;  
     border: 0 none;
@@ -85,4 +85,8 @@ th, td {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.hidden{
+    display: none;
 }

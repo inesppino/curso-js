@@ -17,6 +17,7 @@ function inicioApp() {
     }
 
     ajax.send();
+
 }
 
 function showMoviesTable() {
@@ -67,7 +68,7 @@ function createLine(pelicula) {
     const btnModificar = document.createElement('button');
     const btnTextM = document.createTextNode('Modificar');
     btnModificar.appendChild(btnTextM);
-    btnModificar.className = 'btn btn-modify';
+    btnModificar.className = 'btn-modify';
     btnModificar.type = "button";
     btnModificar.setAttribute('data-name', pelicula.titulo);
     btnModificar.setAttribute('data-director', pelicula.director);
@@ -81,7 +82,7 @@ function createLine(pelicula) {
     const btnEliminar = document.createElement('button');
     const btnTextE = document.createTextNode('Eliminar');
     btnEliminar.appendChild(btnTextE);
-    btnEliminar.className = 'btn btn-eliminar';
+    btnEliminar.className = 'btn-eliminar';
     btnEliminar.type = "button";
     btnEliminar.addEventListener('click', deleteMovieButton);
     btnEliminar.setAttribute('data-id', pelicula.codId);
@@ -207,3 +208,29 @@ function formatDate(date) {
 
     return [year, month, day].join('-');
 }
+
+function showForm(){
+    const form = document.querySelector('.form');
+    const btnShowForm = document.querySelector('#btn-showForm');
+    if(form.classList.contains('hidden') === true){
+        btnShowForm.value="Modificar";
+        form.classList.remove('hidden');
+    } else {
+        form.classList.add('hidden');
+        btnShowForm.value="Nuevo Libro";
+    }
+}
+
+// function collapsible(event) {
+//   const clickableSection = event.currentTarget;
+//   if (clickableSection.classList.contains('collapsible__design') === true) {
+//     designContent.classList.toggle('hidden');
+//   } else if (clickableSection.classList.contains('collapsible__fill') === true) {
+//     fillContent.classList.toggle('hidden');
+//   } else {
+//     shareContent.classList.toggle('hidden');
+//   }
+// }
+// for (let i = 0; i < buttonCollapsible.length; i++) {
+//   buttonCollapsible[i].addEventListener('click', collapsible);
+// }
