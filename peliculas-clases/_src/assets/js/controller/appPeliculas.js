@@ -2,7 +2,7 @@
 function inicioApp() {
     model = new modeloPeliculas();
 
-    
+
     // model.saveMovie({ idNumber: "ABC-12345-AB", filmName: "Pulp Fiction", directorName: "Quentin Tarantino", genre: "Thriller", date: "2015-01-02", grade: 8 })
     // model.saveMovie({ idNumber: "CBA-12345-BA", filmName: "Inception", directorName: "Christopher Nolan", genre: "Fantasy", date: "2010-01-09", grade: 8 })
     showMoviesTable();
@@ -11,7 +11,7 @@ function inicioApp() {
 
 function givedataFilm(){
     var ajax = new XMLHttpRequest();
-    ajax.open("GET","../../json/dataFilm.json");
+    ajax.open("GET","assets/data/dataFilm.json");
     ajax.onreadystatechange = function (){
 
         if(ajax.status == 200 && ajax.readyState == 4){
@@ -20,7 +20,7 @@ function givedataFilm(){
         }
         console.log(ajax.readyState);
     }
-    
+
     ajax.send();
 }
 
@@ -131,5 +131,5 @@ function reloadForm(peli) {
     document.getElementById("genre").value = peli.genre;
     document.getElementById("publicationDate").value = peli.date;
     document.getElementById("grade").value = peli.grade;
-   
+
 }
