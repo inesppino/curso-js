@@ -84,6 +84,16 @@ gulp.task('images', function(done) {
 
 
 
+// >> Copy data (JSON) files
+gulp.task('data', function(done) {
+  gulp.src(config.data.src)
+    .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+    .pipe(gulp.dest(config.data.dest));
+  done();
+});
+
+
+
 // >> Copy icon files
 gulp.task('icons', function(done) {
   gulp.src(config.icons.src)
@@ -168,8 +178,18 @@ gulp.task('icons-dist', function(done) {
 
 
 
+// >> Copy data (JSON) files
+gulp.task('data-dist', function(done) {
+  gulp.src(config.data.src)
+    .pipe(plumber({errorHandler: notify.onError('Error: <%= error.message %>')}))
+    .pipe(gulp.dest(config.data.dist));
+  done();
+});
+
+
+
 // > Watchers + BrowserSync server
-gulp.task('default', gulp.series(['clean','html', 'styles','scripts', 'images', 'icons'], function(done) {
+gulp.task('default', gulp.series(['clean','html', 'styles','scripts', 'images', 'icons', 'data'], function(done) {
   browserSync.init({
     server : {
       baseDir: './public/'
@@ -180,13 +200,14 @@ gulp.task('default', gulp.series(['clean','html', 'styles','scripts', 'images', 
   gulp.watch(config.icons.src, gulp.series(['icons', 'bs-reload']));
   gulp.watch(config.scss.src, gulp.series('styles'));
   gulp.watch(config.js.src, gulp.series(['scripts', 'bs-reload']));
+  gulp.watch(config.watch.data, gulp.series(['data', 'bs-reload']));
   done();
 }));
 
 
 
 // > Build a production-ready version of your proyect
-gulp.task('docs', gulp.series(['clean-dist','html-dist','styles-dist','scripts-dist', 'images-dist', 'icons-dist'], function(done) {
+gulp.task('docs', gulp.series(['clean-dist','html-dist','styles-dist','scripts-dist', 'images-dist', 'icons-dist', 'data-dist'], function(done) {
   console.log('🦄 Build OK!');
   done();
 }));
